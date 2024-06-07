@@ -1,0 +1,77 @@
+﻿@model IEnumerable<KTMKomuter.Models.KtmUsers>
+
+@{
+    ViewData["Title"] = "User List";
+}
+
+<h1>KTM User List</h1>
+
+<p>
+    <a asp-action="TrainTicket">New User</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdentityCardOrPassportNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DictCurrentDestination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DictToDestination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AfterDiscount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ViewId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchaserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdentityCardOrPassportNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailAddress)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.DictCurrentDestination[item.IndexCurrentDestination])
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.DictToDestination[item.IndexToDestination])
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AfterDiscount)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ViewId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ViewId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ViewId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
