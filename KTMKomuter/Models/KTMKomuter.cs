@@ -139,7 +139,7 @@ namespace KTMKomuter.Models
 
 
         [Required]
-        [Display(Name = "Zone")]
+        [Display(Name = "Category")]
         public IDictionary<int, string> DictCategory
         {
             get
