@@ -24,6 +24,10 @@ This project is an online ticketing system for KTM Komuter developed using ASP.N
   - Good navigation structure and design of the user interface: 15
   - Other features that may be beneficial to customers or management: 10
 - **Demo and Submission**: Demonstration scheduled on 17 June 2024. Complete project folder upload and report submission required.
+
+## Ktm Fare route 
+![Table Image](fareRoute.png)
+
   
 ## Project Contributors
 - Afeef
