@@ -1,0 +1,53 @@
+﻿@model KTMKomuter.Models.KtmUsers
+
+<head>
+    <title>Pos Laju Invoice</title>
+    <link href="~/css/PosLaju.css" rel="stylesheet" />
+</head>
+<body>
+
+    <p>
+        <label>Id:</label>
+        @Html.DisplayFor(x => x.Id)
+    </p>
+   
+    <br />
+    <h5>User Information</h5>
+    <p>
+        <label>Your name:</label>
+        @Html.DisplayFor(x => x.PurchaserName)
+    </p>
+
+    <p>
+        <label>your identity card / passport number :</label>
+        @Html.DisplayFor(x => x.IdentityCardOrPassportNumber)
+    </p>
+    <p>
+        <label>your email:</label>
+        @Html.DisplayFor(x => x.EmailAddress)
+    </p>
+
+    <br />
+   
+    <p>
+        <label>Your Route </label>
+        @Html.DisplayFor(x => x.DictCurrentDestination[Model.IndexCurrentDestination])
+    </p>
+    <p>
+        <label>Zone: </label>
+        @Html.DisplayFor(x => x.DictToDestination[Model.IndexToDestination])
+    </p>
+    <p>
+        <label>Amount: </label>
+        @Html.DisplayFor(x => x.Amount)
+    </p>
+    <p>
+        <label>After Discount price :</label>
+        @Html.DisplayFor(x => x.AfterDiscount)
+    </p>
+
+    <p>
+        @Html.ActionLink("Back to List", "TrainTicket")
+    </p>
+</body>
+

@@ -1,0 +1,27 @@
+CREATE TABLE [dbo].[KtmUser] (
+    [Id]                           CHAR (10)      NOT NULL,
+    [PurchaserName]                NVARCHAR (100) NOT NULL,
+    [IdentityCardOrPassportNumber] NVARCHAR (50)  NOT NULL,
+    [EmailAddress]                 NVARCHAR (100) NOT NULL,
+    [indexCurrentDestination]      INT            NOT NULL,
+    [indexToDestination]           INT            NOT NULL,
+    [Amount]                       FLOAT (53)     NOT NULL,
+    [AfterDiscount]                FLOAT (53)     NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+CREATE PROCEDURE spInsertIntoTable
+	@Id char(10),
+    @PurchaserName NVARCHAR(100),
+    @IdentityCardOrPassportNumber NVARCHAR(50),
+    @EmailAddress NVARCHAR(100),
+    @indexCurrentDestination INT,
+    @indexToDestination INT,
+    @Amount float,
+	@AfterDiscount float
+AS
+    INSERT INTO KtmUser
+   
+    VALUES 
+    (@Id,@PurchaserName, @IdentityCardOrPassportNumber, @EmailAddress, @indexCurrentDestination, @indexToDestination, @Amount, @AfterDiscount)
