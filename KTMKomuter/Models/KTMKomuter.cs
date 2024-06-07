@@ -2,7 +2,7 @@
 
 namespace KTMKomuter.Models
 {
-    public class KTMKomuter
+    public class KtmUsers
     {
 
 
@@ -52,6 +52,49 @@ namespace KTMKomuter.Models
             get
             {
                 return rates[IndexCurrentDestination, IndexToDestination];
+            }
+            set { }
+        }
+
+        [Required]
+        
+        [Display(Name = "Category")]
+        public IDictionary<int, string> CategoryDiscount
+        {
+            get
+            {
+                return new Dictionary<int, string>()
+                {
+                    {0, "Senior Citizens"},
+                    {1, "disabled"},
+                    {2, "students"}
+                };
+            }
+            set { }
+        }
+
+
+        [DisplayFormat(DataFormatString = "{0:c2}")]
+        public double AfterDiscount
+        {
+            get
+            {
+                double afterDiscount;
+                double discountRate = 0.0;
+                if (CategoryDiscount.ContainsKey(0)) // Senior Citizens
+                {
+                    discountRate = 0.3; // 30% discount
+                }
+                else if (CategoryDiscount.ContainsKey(1)) // Disabled
+                {
+                    discountRate = 0.35; // 35% discount
+                }
+                else if (CategoryDiscount.ContainsKey(2)) // Students
+                {
+                    discountRate = 0.25; // 25% discount
+                }
+
+                return afterDiscount = Amount * (1 - discountRate); // Calculate discounted amount
             }
             set { }
         }
@@ -138,21 +181,7 @@ namespace KTMKomuter.Models
         }
 
 
-        [Required]
-        [Display(Name = "Category")]
-        public IDictionary<int, string> DictCategory
-        {
-            get
-            {
-                return new Dictionary<int, string>()
-                {
-                    {0, "Senior citizens"},
-                    {1, "disabled"},
-                    {2, "students"}
-                };
-            }
-            set { }
-        }
+      
 
         static double[,] rates =
 {
