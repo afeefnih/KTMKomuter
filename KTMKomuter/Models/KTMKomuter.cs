@@ -28,7 +28,7 @@ namespace KTMKomuter.Models
         public string? PurchaserName { get; set; }
 
         [Required(ErrorMessage = "Enter Your IC or Passport No")]
-        [Display(Name = "Identity")]
+        [Display(Name = "IC / Passport No")]
         public string? IdentityCardOrPassportNumber { get; set; }
 
         [Required(ErrorMessage = "Enter Your Email")]
