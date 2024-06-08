@@ -1,0 +1,39 @@
+﻿@model KTMKomuter.Models.KtmUsers
+
+<head>
+    <title>KTM Komuter Edit Form</title>
+    <link href="~/css/PosLaju.css" rel="stylesheet" />
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        <h5>Edit User Information</h5>
+        <p>
+            <label>User Id: </label>
+            @Html.DisplayFor(x => x.ViewId)
+        </p>
+        <p>
+            <label>User name: </label>
+            @Html.TextBoxFor(x => x.PurchaserName)
+        </p>
+        <p>
+            <label>User Identity Card/Passport Number: </label>
+            @Html.TextBoxFor(x => x.IdentityCardOrPassportNumber)
+        </p>
+        <p>
+            <label>User email:</label>
+            @Html.TextBoxFor(x => x.EmailAddress)
+        </p>
+        <p>
+            <label>Current Destination:</label>
+            @Html.DropDownListFor(x => x.IndexCurrentDestination, new SelectList(Model.DictCurrentDestination, "Key", "Value"))
+        </p>
+        <p>
+            <label>To Destination:</label>
+            @Html.DropDownListFor(x => x.IndexToDestination, new SelectList(Model.DictToDestination, "Key", "Value"))
+        </p>
+        <p>
+            <input type="submit" value="Submit" />
+        </p>
+    }
+</body>
