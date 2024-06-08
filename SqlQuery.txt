@@ -39,3 +39,8 @@ BEGIN
         EmailAddress = @EmailAddress
     WHERE Id = @Id;
 END;
+
+CREATE PROCEDURE spDeleteTicket
+	@Id char(10)
+AS
+DELETE FROM KtmUser WHERE Id = @Id;
