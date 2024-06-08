@@ -85,7 +85,7 @@ namespace KTMKomuter.Controllers
         public IActionResult TrainTicket()
         {
             KtmUsers ktm = new KtmUsers();
-            ktm.IndexCurrentDestination = ktm.IndexToDestination = -1;
+            ktm.IndexCurrentDestination = ktm.IndexToDestination = ktm.Category = -1;
             return View(ktm);
         }
 

@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace KTMKomuter.Models
 {
     public class KtmUsers
     {
-
-
         [Display(Name = "Komuter Id")]
         public string Id
         {
@@ -20,8 +20,6 @@ namespace KTMKomuter.Models
         [Display(Name = "Komuter Id")]
         public string? ViewId { get; set; }
 
-
-
         // Sender
         [Required(ErrorMessage = "Enter Your name")]
         [Display(Name = "Name")]
@@ -35,15 +33,14 @@ namespace KTMKomuter.Models
         [Display(Name = "Email")]
         public string? EmailAddress { get; set; }
 
-
         // Parcel
-        [Required]
-        [Display(Name = "Index Current Destination")]
+        [Required(ErrorMessage = "Current Destination is required.")]
+        [Display(Name = "Current Destination")]
         public int IndexCurrentDestination { get; set; }
-        [Required]
-        [Display(Name = "Desire Destination")]
-        public int IndexToDestination { get; set; }
 
+        [Required(ErrorMessage = "To Destination is required.")]
+        [Display(Name = "To Destination")]
+        public int IndexToDestination { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:c2}")]
         [Display(Name = "Paid Amount")]
@@ -56,45 +53,53 @@ namespace KTMKomuter.Models
             set { }
         }
 
-        [Required]
-        
+        [Required(ErrorMessage = "Select Your Category")]
         [Display(Name = "Category")]
-        public IDictionary<int, string> CategoryDiscount
+        public int Category { get; set; }
+
+        [Required(ErrorMessage = "Select Your Category")]
+        [Display(Name = "Category")]
+        public IDictionary<int, string> DictCategoryDiscount
         {
             get
             {
                 return new Dictionary<int, string>()
                 {
-                    {0, "Senior Citizens"},
-                    {1, "disabled"},
-                    {2, "students"}
-                };
+                {0, "Senior Citizens"},
+                {1, "disabled"},
+                {2, "students"},
+                {3, "None"}
+
+             };
             }
             set { }
         }
-
 
         [DisplayFormat(DataFormatString = "{0:c2}")]
         public double AfterDiscount
         {
             get
             {
-                double afterDiscount;
                 double discountRate = 0.0;
-                if (CategoryDiscount.ContainsKey(0)) // Senior Citizens
+
+                if (Category == 0) // Senior Citizens
                 {
                     discountRate = 0.3; // 30% discount
                 }
-                else if (CategoryDiscount.ContainsKey(1)) // Disabled
+                else if (Category == 1) // Disabled
                 {
                     discountRate = 0.35; // 35% discount
                 }
-                else if (CategoryDiscount.ContainsKey(2)) // Students
+                else if (Category == 2) // Students
                 {
                     discountRate = 0.25; // 25% discount
                 }
+                else if (Category == 3) // None
+                {
+                    discountRate = 0.0; // 0% discount
+                }
 
-                return afterDiscount = Amount * (1 - discountRate); // Calculate discounted amount
+                return Amount * (1 - discountRate); // Calculate discounted amount
             }
             set { }
         }
@@ -179,9 +184,6 @@ namespace KTMKomuter.Models
             }
             set { }
         }
-
-
-      
 
         static double[,] rates =
 {
