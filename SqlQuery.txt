@@ -25,3 +25,26 @@ AS
    
     VALUES 
     (@Id,@PurchaserName, @IdentityCardOrPassportNumber, @EmailAddress, @indexCurrentDestination, @indexToDestination, @Amount, @AfterDiscount)
+
+CREATE PROCEDURE spUpdateIntoTable
+    @Id CHAR(10),
+    @PurchaserName NVARCHAR(100),
+    @IdentityCardOrPassportNumber NVARCHAR(50),
+    @EmailAddress NVARCHAR(100),
+    @indexCurrentDestination INT,
+    @indexToDestination INT
+AS
+BEGIN
+    UPDATE KtmUser
+    SET PurchaserName = @PurchaserName,
+        IdentityCardOrPassportNumber = @IdentityCardOrPassportNumber,
+        EmailAddress = @EmailAddress,
+        indexCurrentDestination = @indexCurrentDestination,
+        indexToDestination = @indexToDestination
+    WHERE Id = @Id;
+END;
+
+CREATE PROCEDURE spDeleteTicket
+	@Id char(10)
+AS
+DELETE FROM KtmUser WHERE Id = @Id;
