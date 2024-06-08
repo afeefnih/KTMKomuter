@@ -42,7 +42,7 @@ namespace KTMKomuter.Models
         [Display(Name = "Destination")]
         public int IndexToDestination { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:c2}")]
+        [DisplayFormat(DataFormatString = "{0:RM0.00}")]
         [Display(Name = "Paid Amount")]
         public double Amount
         {
@@ -75,7 +75,7 @@ namespace KTMKomuter.Models
             set { }
         }
 
-        [DisplayFormat(DataFormatString = "{0:c2}")]
+        [DisplayFormat(DataFormatString = "{0:RM0.00}")]
         public double AfterDiscount
         {
             get

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Collections.Generic;
@@ -280,6 +280,48 @@ namespace KTMKomuter.Controllers
         }
 
 
+        public IActionResult Details(string id)
+        {
+            IList<KtmUsers> dblist = GetDbList(out string errorMessage);
+
+            var result = dblist.First(x => x.ViewId == id);
+            return View(result);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(string id)
+        {
+            IList<KtmUsers> dblist = GetDbList(out string errorMessage);
+
+            var result = dblist.First(x => x.ViewId == id);
+            return View(result);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult ConfirmDelete(string id)
+        {
+            using (SqlConnection conn = new SqlConnection(configuration.GetConnectionString("ParcelConnStr")))
+            using (SqlCommand cmd = new SqlCommand("spDeleteTicket", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return RedirectToAction("Error");
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
 
 
     }
