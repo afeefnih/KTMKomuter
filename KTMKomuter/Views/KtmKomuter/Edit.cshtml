@@ -25,6 +25,14 @@
             @Html.TextBoxFor(x => x.EmailAddress)
         </p>
         <p>
+            <label>Current Destination:</label>
+            @Html.DropDownListFor(x => x.IndexCurrentDestination, new SelectList(Model.DictCurrentDestination, "Key", "Value"))
+        </p>
+        <p>
+            <label>To Destination:</label>
+            @Html.DropDownListFor(x => x.IndexToDestination, new SelectList(Model.DictToDestination, "Key", "Value"))
+        </p>
+        <p>
             <input type="submit" value="Submit" />
         </p>
     }

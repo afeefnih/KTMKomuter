@@ -8,6 +8,8 @@ using Microsoft.Extensions.Logging;
 using System.Net.Mail;
 using System.Security.Policy;
 using System.Collections;
+using KTMKomuter.MailSettings;
+
 
 namespace KTMKomuter.Controllers
 {
@@ -92,48 +94,6 @@ namespace KTMKomuter.Controllers
             return View(ktm);
         }
 
-        [HttpPost]
-        public IActionResult TrainTicket(KtmUsers ktm)
-        {
-            if (ModelState.IsValid)
-            {
-                SqlConnection conn = new SqlConnection(configuration.GetConnectionString("ParcelConnStr"));
-                SqlCommand cmd = new SqlCommand("spInsertIntoTable", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                cmd.Parameters.AddWithValue("@Id", ktm.Id);
-                cmd.Parameters.AddWithValue("@PurchaserName", ktm.PurchaserName);
-                cmd.Parameters.AddWithValue("@IdentityCardOrPassportNumber", ktm.IdentityCardOrPassportNumber);
-                cmd.Parameters.AddWithValue("@EmailAddress", ktm.EmailAddress);
-                cmd.Parameters.AddWithValue("@IndexCurrentDestination", ktm.IndexCurrentDestination);
-                cmd.Parameters.AddWithValue("@IndexToDestination", ktm.IndexToDestination);
-                cmd.Parameters.AddWithValue("@Amount", ktm.Amount);
-                cmd.Parameters.AddWithValue("@AfterDiscount", ktm.AfterDiscount);
-
-                try
-                {
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-                catch (SqlException ex)
-                {
-                    logger.LogError(ex, "SQL error occurred while inserting into the table.");
-                    return RedirectToAction("Error", new { message = "SQL error: " + ex.Message });
-                }
-                catch (Exception ex)
-                {
-                    logger.LogError(ex, "An error occurred while inserting into the table.");
-                    return RedirectToAction("Error", new { message = "Error: " + ex.Message });
-                }
-                finally
-                {
-                    conn.Close();
-                }
-                return View("TrainTicketInvoice", ktm);
-            }
-            return View(ktm);
-        }
-
         [HttpGet]
         public IActionResult Edit(string id)
         {
@@ -186,6 +146,48 @@ namespace KTMKomuter.Controllers
         }
 
         [HttpPost]
+        public IActionResult TrainTicket(KtmUsers ktm)
+        {
+            if (ModelState.IsValid)
+            {
+                SqlConnection conn = new SqlConnection(configuration.GetConnectionString("ParcelConnStr"));
+                SqlCommand cmd = new SqlCommand("spInsertIntoTable", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Id", ktm.Id);
+                cmd.Parameters.AddWithValue("@PurchaserName", ktm.PurchaserName);
+                cmd.Parameters.AddWithValue("@IdentityCardOrPassportNumber", ktm.IdentityCardOrPassportNumber);
+                cmd.Parameters.AddWithValue("@EmailAddress", ktm.EmailAddress);
+                cmd.Parameters.AddWithValue("@IndexCurrentDestination", ktm.IndexCurrentDestination);
+                cmd.Parameters.AddWithValue("@IndexToDestination", ktm.IndexToDestination);
+                cmd.Parameters.AddWithValue("@Amount", ktm.Amount);
+                cmd.Parameters.AddWithValue("@AfterDiscount", ktm.AfterDiscount);
+
+                try
+                {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (SqlException ex)
+                {
+                    logger.LogError(ex, "SQL error occurred while inserting into the table.");
+                    return RedirectToAction("Error", new { message = "SQL error: " + ex.Message });
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "An error occurred while inserting into the table.");
+                    return RedirectToAction("Error", new { message = "Error: " + ex.Message });
+                }
+                finally
+                {
+                    conn.Close();
+                }
+                return View("TrainTicketInvoice", ktm);
+            }
+            return View(ktm);
+        }
+
+        [HttpPost]
         public IActionResult Edit(string id, KtmUsers ktm)
         {
             if (ModelState.IsValid)
@@ -194,10 +196,12 @@ namespace KTMKomuter.Controllers
                 SqlCommand cmd = new SqlCommand("spUpdateIntoTable", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@Id", id);  // Ensure the correct Id is passed
+                cmd.Parameters.AddWithValue("@Id", id); 
                 cmd.Parameters.AddWithValue("@PurchaserName", ktm.PurchaserName);
                 cmd.Parameters.AddWithValue("@IdentityCardOrPassportNumber", ktm.IdentityCardOrPassportNumber);
                 cmd.Parameters.AddWithValue("@EmailAddress", ktm.EmailAddress);
+                cmd.Parameters.AddWithValue("@IndexCurrentDestination", ktm.IndexCurrentDestination);
+                cmd.Parameters.AddWithValue("@IndexToDestination", ktm.IndexToDestination);
 
                 try
                 {
@@ -228,6 +232,53 @@ namespace KTMKomuter.Controllers
             }
             return View(ktm);
         }
+
+        public IActionResult SendMail(string id)
+        {
+            string errorMessage;
+            IList<KtmUsers> dbList = GetDbList(out errorMessage);
+
+            if (errorMessage != null)
+            {
+                return RedirectToAction("Error", new { message = errorMessage });
+            }
+
+            var ktm = dbList.FirstOrDefault(x => x.ViewId == id);
+
+            if (ktm == null)
+            {
+                return RedirectToAction("Error", new { message = "User not found." });
+            }
+
+            var currentDestinationIndex = ktm.IndexCurrentDestination;
+            var currentDestination = ktm.DictCurrentDestination.ContainsKey(currentDestinationIndex) ? ktm.DictCurrentDestination[currentDestinationIndex] : "Unknown";
+
+            var subject = "Ticket Information " + ktm.ViewId;
+            var body = "Ticket ID: " + ktm.ViewId + "<br>" +
+                       "Purchaser Name: " + ktm.PurchaserName + "<br>" +
+                       "Identity Card or Passport Number: " + ktm.IdentityCardOrPassportNumber + "<br>" +
+                       "Email Address: " + ktm.EmailAddress + "<br>" +
+                       "Current Destination: " + currentDestination + "<br>" +
+                       "To Destination: " + ktm.DictToDestination[ktm.IndexToDestination] + "<br>" +
+                       "Amount: " + ktm.Amount.ToString("c2") + "<br>" +
+                       "After Discount: " + ktm.AfterDiscount.ToString("c2");
+
+            var mail = new Mail(configuration);
+
+            if (mail.Send(configuration["Gmail:Username"], ktm.EmailAddress, subject, body))
+            {
+                ViewBag.Message = "Mail successfully sent to " + ktm.EmailAddress;
+                ViewBag.Body = body;
+            }
+            else
+            {
+                ViewBag.Message = "Sending Mail Failed";
+                ViewBag.Body = "";
+            }
+
+            return View(ktm);
+        }
+
 
 
 
