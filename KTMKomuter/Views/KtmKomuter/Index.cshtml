@@ -7,10 +7,10 @@
 <h1>KTM User List</h1>
 
 <p>
-    <a asp-action="TrainTicket">New User</a>
+    @Html.ActionLink(" New User", "TrainTicket", null, null, new { @class = "bi bi-person-add btn btn-primary" })
 </p>
-<table class="table">
-    <thead>
+<table class="table table-hover table-striped rounded-header">
+    <thead class="table-dark rounded-top">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.ViewId)
@@ -36,7 +36,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.AfterDiscount)
             </th>
-            <th></th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -67,9 +67,9 @@
                 @Html.DisplayFor(modelItem => item.AfterDiscount)
             </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ViewId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ViewId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ViewId })
+                    @Html.ActionLink("Details", "Details", null, new { id = item.ViewId }, new { @class = "btn btn-sm btn-success" })
+                    @Html.ActionLink("", "Edit", null, new { id = item.ViewId }, new { @class = "bi bi-pencil-square btn btn-sm btn-primary" })
+                    @Html.ActionLink("", "Delete", null, new { id = item.ViewId }, new { @class = "bi bi-trash3 btn btn-sm btn-danger" })
             </td>
         </tr>
 }
