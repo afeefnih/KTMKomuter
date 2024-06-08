@@ -18,5 +18,20 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #d7dfea;
+}
+
+footer {
+    background-color:white;
+}
+
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+}
+
+.btn {
+    border-radius: 10px !important;
 }
