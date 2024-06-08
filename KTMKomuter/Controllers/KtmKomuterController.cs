@@ -326,7 +326,8 @@ namespace KTMKomuter.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return RedirectToAction("Error");
+                    logger.LogError(ex, "An error occurred while updating the table.");
+                    return RedirectToAction("Error", new { message = "Error: " + ex.Message });
                 }
                 finally
                 {
