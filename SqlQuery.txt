@@ -30,13 +30,17 @@ CREATE PROCEDURE spUpdateIntoTable
     @Id CHAR(10),
     @PurchaserName NVARCHAR(100),
     @IdentityCardOrPassportNumber NVARCHAR(50),
-    @EmailAddress NVARCHAR(100)
+    @EmailAddress NVARCHAR(100),
+    @indexCurrentDestination INT,
+    @indexToDestination INT
 AS
 BEGIN
     UPDATE KtmUser
     SET PurchaserName = @PurchaserName,
         IdentityCardOrPassportNumber = @IdentityCardOrPassportNumber,
-        EmailAddress = @EmailAddress
+        EmailAddress = @EmailAddress,
+        indexCurrentDestination = @indexCurrentDestination,
+        indexToDestination = @indexToDestination
     WHERE Id = @Id;
 END;
 
