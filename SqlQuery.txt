@@ -25,3 +25,17 @@ AS
    
     VALUES 
     (@Id,@PurchaserName, @IdentityCardOrPassportNumber, @EmailAddress, @indexCurrentDestination, @indexToDestination, @Amount, @AfterDiscount)
+
+CREATE PROCEDURE spUpdateIntoTable
+    @Id CHAR(10),
+    @PurchaserName NVARCHAR(100),
+    @IdentityCardOrPassportNumber NVARCHAR(50),
+    @EmailAddress NVARCHAR(100)
+AS
+BEGIN
+    UPDATE KtmUser
+    SET PurchaserName = @PurchaserName,
+        IdentityCardOrPassportNumber = @IdentityCardOrPassportNumber,
+        EmailAddress = @EmailAddress
+    WHERE Id = @Id;
+END;
