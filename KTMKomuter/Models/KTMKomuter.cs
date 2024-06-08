@@ -6,7 +6,7 @@ namespace KTMKomuter.Models
 {
     public class KtmUsers
     {
-        [Display(Name = "Komuter Id")]
+        [Display(Name = "Id")]
         public string Id
         {
             get
@@ -17,7 +17,7 @@ namespace KTMKomuter.Models
             set { }
         }
 
-        [Display(Name = "Komuter Id")]
+        [Display(Name = "Id")]
         public string? ViewId { get; set; }
 
         // Sender
@@ -34,12 +34,12 @@ namespace KTMKomuter.Models
         public string? EmailAddress { get; set; }
 
         // Parcel
-        [Required(ErrorMessage = "Current Destination is required.")]
-        [Display(Name = "Current Destination")]
+        [Required(ErrorMessage = "Origin is required.")]
+        [Display(Name = "Origin")]
         public int IndexCurrentDestination { get; set; }
 
-        [Required(ErrorMessage = "To Destination is required.")]
-        [Display(Name = "To Destination")]
+        [Required(ErrorMessage = "Destination is required.")]
+        [Display(Name = "Destination")]
         public int IndexToDestination { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:c2}")]
@@ -106,7 +106,7 @@ namespace KTMKomuter.Models
 
         // Delivery Rate Table
         [Required]
-        [Display(Name = "Current Destination")]
+        [Display(Name = "Origin")]
         public IDictionary<int, string> DictCurrentDestination
         {
             get
@@ -146,7 +146,7 @@ namespace KTMKomuter.Models
         }
 
         [Required]
-        [Display(Name = "Desire Destination")]
+        [Display(Name = "Destination")]
         public IDictionary<int, string> DictToDestination
         {
             get
