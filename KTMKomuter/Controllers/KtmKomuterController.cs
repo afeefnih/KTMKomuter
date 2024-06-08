@@ -196,7 +196,7 @@ namespace KTMKomuter.Controllers
                 SqlCommand cmd = new SqlCommand("spUpdateIntoTable", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@Id", id); 
+                cmd.Parameters.AddWithValue("@Id", id);
                 cmd.Parameters.AddWithValue("@PurchaserName", ktm.PurchaserName);
                 cmd.Parameters.AddWithValue("@IdentityCardOrPassportNumber", ktm.IdentityCardOrPassportNumber);
                 cmd.Parameters.AddWithValue("@EmailAddress", ktm.EmailAddress);
@@ -228,21 +228,9 @@ namespace KTMKomuter.Controllers
                     conn.Close();
                 }
 
-                try
-                {
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    return RedirectToAction("Index");
-                }
-                catch (Exception ex)
-                {
-                    return RedirectToAction("Error");
-                }
-                finally
-                {
-                    conn.Close();
-                }
+                return RedirectToAction("Index");
             }
+            return View(ktm);
         }
 
         public IActionResult SendMail(string id)
