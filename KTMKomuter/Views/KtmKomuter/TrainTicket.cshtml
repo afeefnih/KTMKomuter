@@ -44,7 +44,7 @@
 
 
 
-        <h5>Parcel Information</h5>
+        <h5>Train Information</h5>
         <div class="row">
             <p class="col-md-4">
                 <label>@Html.DisplayNameFor(x => x.IndexCurrentDestination)</label>
@@ -68,11 +68,11 @@
         <div class="row">
 
             <p class="col-md-4">
-                <label>@Html.DisplayNameFor(x => x.CategoryDiscount)</label>
-                @Html.DropDownListFor(x => x.CategoryDiscount,
-                         new SelectList(Model.CategoryDiscount, "Key", "Value"), "Select your current destination:",
+                <label>@Html.DisplayNameFor(x => x.Category)</label>
+                @Html.DropDownListFor(x => x.Category,
+                         new SelectList(Model.DictCategoryDiscount, "Key", "Value"), "Select your categories",
                          new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.CategoryDiscount, "",
+                @Html.ValidationMessageFor(x => x.Category, "",
                          new { @class = "text-danger" })
             </p>
         </div>
