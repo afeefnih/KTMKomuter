@@ -1,11 +1,10 @@
 html {
-  font-size: 14px;
+    font-size: 16px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.fixnav {
+    width: calc( 100% );
+    max-width: calc( 100vw - 1em );
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -76,6 +75,21 @@ footer {
 .form-floating > .form-select {
     padding-bottom: 5px;
 }
+
+.form-wicon {
+    position: relative;
+}
+    .form-wicon i {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: rgb(0 0 0 / 70%) !important;
+    }
+
+    .form-wicon .form-control {
+        padding-left: 36px !important;
+    }
 
 .card-footer {
     border-top: 0px !important;
