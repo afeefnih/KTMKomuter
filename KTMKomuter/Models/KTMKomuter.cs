@@ -66,8 +66,8 @@ namespace KTMKomuter.Models
                 return new Dictionary<int, string>()
                 {
                 {0, "Senior Citizens"},
-                {1, "disabled"},
-                {2, "students"},
+                {1, "Disabled"},
+                {2, "Students"},
                 {3, "None"}
 
              };
