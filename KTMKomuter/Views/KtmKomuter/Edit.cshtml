@@ -1,42 +1,77 @@
 ﻿@model KTMKomuter.Models.KtmUsers
 
-<head>
-    <title>KTM Komuter Edit Form</title>
-    <link href="~/css/PosLaju.css" rel="stylesheet" />
-</head>
-<body>
-    @using (Html.BeginForm())
-    {
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="mx-auto" style="max-width:800px;">
+        <p>
+            @Html.ActionLink(" Back to List", "Index", null, null, new { @class = "bi bi-arrow-left-short btn btn-primary" })
+        </p>
         <h5>Edit User Information</h5>
-        <p>
-            <label>User Id: </label>
-            @Html.DisplayFor(x => x.ViewId)
-        </p>
-        <p>
-            <label>User name: </label>
-            @Html.TextBoxFor(x => x.PurchaserName)
-        </p>
-        <p>
-            <label>User Identity Card/Passport Number: </label>
-            @Html.TextBoxFor(x => x.IdentityCardOrPassportNumber)
-        </p>
-        <p>
-            <label>User email:</label>
-            @Html.TextBoxFor(x => x.EmailAddress)
-        </p>
-        <p>
-            <label>Current Destination:</label>
-            @Html.DropDownListFor(x => x.IndexCurrentDestination, new SelectList(Model.DictCurrentDestination, "Key", "Value"))
-        </p>
-        <p>
-            <label>To Destination:</label>
-            @Html.DropDownListFor(x => x.IndexToDestination, new SelectList(Model.DictToDestination, "Key", "Value"))
-        </p>
-        <p>
-            <input type="submit" value="Submit" />
-        </p>
-        <p>
-            @Html.ActionLink("Back to List", "Index")
-        </p>
-    }
-</body>
+        <div class="card">
+            <div class="card-body p-4">
+
+
+                <label class="fw-bold">@Html.DisplayFor(x => x.ViewId)</label>
+
+                <div class="row">
+                    <div class="col mb-3">
+                        <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(x => x.PurchaserName)</label>
+                        <div class="form-wicon">
+                            @Html.TextBoxFor(x => x.PurchaserName, new { @class = "form-control" })
+                            <i class="bi bi-person-fill ms-3"></i>
+                        </div>
+
+                        @Html.ValidationMessageFor(x => x.PurchaserName, "",
+                                 new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md mb-3">
+                        <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(x => x.IdentityCardOrPassportNumber)</label>
+                        <div class="form-wicon">
+                            @Html.TextBoxFor(x => x.IdentityCardOrPassportNumber, new { @class = "form-control" })
+                            <i class="bi bi-person-vcard-fill ms-3"></i>
+                        </div>
+                        @Html.ValidationMessageFor(x => x.IdentityCardOrPassportNumber, "",
+                                 new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md mb-3">
+                        <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(x => x.EmailAddress)</label>
+                        <div class="form-wicon">
+                            @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control" })
+                            <i class="bi bi-envelope-fill ms-3"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md mb-3">
+                        <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(model => model.DictCurrentDestination)</label>
+                        @Html.DropDownListFor(x => x.IndexCurrentDestination, new SelectList(Model.DictCurrentDestination, "Key", "Value"), "Select your origin",
+                                 new { @class = "form-select" })
+                        @Html.ValidationMessageFor(x => x.IndexCurrentDestination, "",
+                                 new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md mb-3">
+                        <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(model => model.DictToDestination)</label>
+                        @Html.DropDownListFor(x => x.IndexToDestination, new SelectList(Model.DictToDestination, "Key", "Value"), "Select your destination",
+                                 new { @class = "form-select" })
+                        @Html.ValidationMessageFor(x => x.IndexToDestination, "",
+                                 new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer p-4">
+                <input type="submit" value="Submit" class="toright px-4 btn btn-primary" />
+            </div>
+        </div>
+    </div>
+
+}
+

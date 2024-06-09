@@ -1,11 +1,10 @@
 html {
-  font-size: 14px;
+    font-size: 16px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.fixnav {
+    width: calc( 100% );
+    max-width: calc( 100vw - 1em );
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -33,5 +32,65 @@ footer {
 }
 
 .btn {
+    border-radius: 15px !important;
+}
+
+.traininfo1 {
+    border-radius: 0 0 20px 20px;
+    background-image: linear-gradient(45deg, rgb(0 52 101), rgb(0 79 154 / 25%)), url(../images/117776.jpg);
+    padding: 20px;
+    background-size: cover;
+    background-position: 50% 80%;
+}
+
+    .traininfo1 .spacer {
+        height:100px;
+    }
+
+    .traininfo1 h5 {
+        color:white;
+    }
+
+.toright {
+    margin-left:auto;
+    display:block;
+}
+
+.label-sm-grey {
+    color: rgb(0 0 0 / 59%) !important;
+    font-size: 0.9em;
+}
+
+.form-control, .form-select, .card {
+    border: 2px solid #ced4da;
     border-radius: 10px !important;
+    ;
+}
+
+.btn-primary {
+    background-color: #004f9a !important;
+    border-color: #004f9a !important;
+}
+
+.form-floating > .form-select {
+    padding-bottom: 5px;
+}
+
+.form-wicon {
+    position: relative;
+}
+    .form-wicon i {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: rgb(0 0 0 / 70%) !important;
+    }
+
+    .form-wicon .form-control {
+        padding-left: 36px !important;
+    }
+
+.card-footer {
+    border-top: 0px !important;
 }
