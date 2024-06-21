@@ -6,7 +6,7 @@ namespace KTMKomuter.Models
 {
     public class KtmUsers
     {
-        [Display(Name = "Id")]
+        [Display(Name = "ID")]
         public string Id
         {
             get
@@ -17,7 +17,7 @@ namespace KTMKomuter.Models
             set { }
         }
 
-        [Display(Name = "Id")]
+        [Display(Name = "ID")]
         public string? ViewId { get; set; }
 
         // Sender
@@ -26,7 +26,7 @@ namespace KTMKomuter.Models
         public string? PurchaserName { get; set; }
 
         [Required(ErrorMessage = "Enter Your IC or Passport No")]
-        [Display(Name = "IC / Passport No")]
+        [Display(Name = "IC/Passport")]
         public string? IdentityCardOrPassportNumber { get; set; }
 
         [Required(ErrorMessage = "Enter Your Email")]
@@ -35,15 +35,15 @@ namespace KTMKomuter.Models
 
         // Parcel
         [Required(ErrorMessage = "Origin is required.")]
-        [Display(Name = "Origin")]
+        [Display(Name = "From")]
         public int IndexCurrentDestination { get; set; }
 
         [Required(ErrorMessage = "Destination is required.")]
-        [Display(Name = "Destination")]
+        [Display(Name = "To")]
         public int IndexToDestination { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:RM0.00}")]
-        [Display(Name = "Paid Amount")]
+        [Display(Name = "Regular Price")]
         public double Amount
         {
             get
@@ -66,8 +66,8 @@ namespace KTMKomuter.Models
                 return new Dictionary<int, string>()
                 {
                 {0, "Senior Citizens"},
-                {1, "disabled"},
-                {2, "students"},
+                {1, "Disabled"},
+                {2, "Students"},
                 {3, "None"}
 
              };
@@ -76,6 +76,7 @@ namespace KTMKomuter.Models
         }
 
         [DisplayFormat(DataFormatString = "{0:RM0.00}")]
+        [Display(Name = "Final Price")]
         public double AfterDiscount
         {
             get
@@ -106,7 +107,7 @@ namespace KTMKomuter.Models
 
         // Delivery Rate Table
         [Required]
-        [Display(Name = "Origin")]
+        [Display(Name = "From")]
         public IDictionary<int, string> DictCurrentDestination
         {
             get
@@ -146,7 +147,7 @@ namespace KTMKomuter.Models
         }
 
         [Required]
-        [Display(Name = "Destination")]
+        [Display(Name = "To")]
         public IDictionary<int, string> DictToDestination
         {
             get

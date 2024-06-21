@@ -1,85 +1,102 @@
 ﻿@model KTMKomuter.Models.KtmUsers
 
+@{
+    ViewData["Title"] = "Book Ticket";
+}
+<style>
+    .navbar {
+        margin-bottom: 0 !important;
+    }
+</style>
 
-<head>
-    <title>Train Form</title>
+@using (Html.BeginForm())
+{
+    <div class="mx-auto" style="max-width:800px;">
+        <div class="traininfo1">
+            <div class="spacer"></div>
+            <div>
+                <h5>Book Ticket</h5>
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-floating">
+                            @Html.DropDownListFor(x => x.IndexCurrentDestination,
+                                     new SelectList(Model.DictCurrentDestination, "Key", "Value"), "Select your origin",
+                                     new { @class = "form-select", id = "floatingSelect" })
+                            <label class="fw-bold" for="floatingSelect">@Html.DisplayNameFor(x => x.IndexCurrentDestination)</label>
+                        </div>
+                        @Html.ValidationMessageFor(x => x.IndexCurrentDestination, "",
+                                 new { @class = "text-danger" })
+                    </div>
 
-</head>
-<body>
-    @using (Html.BeginForm())
-    {
-
-        <h5>Booking train route Form</h5>
-        <div class="row">
-            <p class="col-md-4">
-                <label>@Html.DisplayNameFor(x => x.PurchaserName)</label>
-                @Html.TextBoxFor(x => x.PurchaserName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.PurchaserName, "",
-                         new { @class = "text-danger" })
-            </p>
-            
+                    <div class="col-md">
+                        <div class="form-floating">
+                            @Html.DropDownListFor(x => x.IndexToDestination,
+                                     new SelectList(Model.DictToDestination, "Key", "Value"), "Select your destination",
+                                     new { @class = "form-select" })
+                            <label class="fw-bold" for="floatingSelect">@Html.DisplayNameFor(x => x.IndexToDestination)</label>
+                        </div>
+                        @Html.ValidationMessageFor(x => x.IndexToDestination, "",
+                                 new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="row">
+        <h5 class="mt-4 mb-0">Personal Information</h5>
+        <label class="mt-0 mb-3 label-sm-grey">Fill in your personal information here.</label>
 
-            <p class="col-md-4">
-                <label>@Html.DisplayNameFor(x => x.IdentityCardOrPassportNumber)</label>
-                @Html.TextBoxFor(x => x.IdentityCardOrPassportNumber, new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.IdentityCardOrPassportNumber, "",
-                         new { @class = "text-danger" })
-            </p>
+        <div class="card">
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col mb-3">
+                        <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(x => x.PurchaserName)</label>
+                        <div class="form-wicon">
+                            @Html.TextBoxFor(x => x.PurchaserName, new { @class = "form-control" })
+                            <i class="bi bi-person-fill ms-3"></i>
+                        </div>
+
+                        @Html.ValidationMessageFor(x => x.PurchaserName, "",
+                                 new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md mb-3">
+                        <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(x => x.IdentityCardOrPassportNumber)</label>
+                        <div class="form-wicon">
+                            @Html.TextBoxFor(x => x.IdentityCardOrPassportNumber, new { @class = "form-control" })
+                            <i class="bi bi-person-vcard-fill ms-3"></i>
+                        </div>
+                        @Html.ValidationMessageFor(x => x.IdentityCardOrPassportNumber, "",
+                                 new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md mb-3">
+                        <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(x => x.EmailAddress)</label>
+                        <div class="form-wicon">
+                            @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control" })
+                            <i class="bi bi-envelope-fill ms-3"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <p class="col-md">
+                        <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(x => x.Category)</label>
+                        @Html.DropDownListFor(x => x.Category,
+                                 new SelectList(Model.DictCategoryDiscount, "Key", "Value"), "Select your categories",
+                                 new { @class = "form-select" })
+                        @Html.ValidationMessageFor(x => x.Category, "",
+                                 new { @class = "text-danger" })
+                    </p>
+                    <p class="col-md"></p>
+                </div>
+            </div>
+            <div class="card-footer p-4">
+                <input type="submit" value="Submit" class="toright px-4 btn btn-primary" />
+            </div>
+
         </div>
-        
-
-        <div class="row">
-
-            <p class="col-md-4">
-                <label>@Html.DisplayNameFor(x => x.EmailAddress)</label>
-                @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control" })
-            </p>
-        </div>
-
-        
-
-
-
-
-        <h5>Train Information</h5>
-        <div class="row">
-            <p class="col-md-4">
-                <label>@Html.DisplayNameFor(x => x.IndexCurrentDestination)</label>
-                @Html.DropDownListFor(x => x.IndexCurrentDestination,
-                         new SelectList(Model.DictCurrentDestination, "Key", "Value"), "Select your current destination:",
-                         new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.IndexCurrentDestination, "",
-                         new { @class = "text-danger" })
-            </p>
-
-            <p class="col-md-4">
-                <label>@Html.DisplayNameFor(x => x.IndexToDestination)</label>
-                @Html.DropDownListFor(x => x.IndexToDestination,
-                         new SelectList(Model.DictToDestination, "Key", "Value"), "Select your desired destination:",
-                         new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.IndexToDestination, "",
-                         new { @class = "text-danger" })
-            </p>
-        </div>
-
-        <div class="row">
-
-            <p class="col-md-4">
-                <label>@Html.DisplayNameFor(x => x.Category)</label>
-                @Html.DropDownListFor(x => x.Category,
-                         new SelectList(Model.DictCategoryDiscount, "Key", "Value"), "Select your categories",
-                         new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.Category, "",
-                         new { @class = "text-danger" })
-            </p>
-        </div>
-        <br />
-        <p>
-            <input type="submit" value="Submit" class="btn btn-primary" />
-        </p>
-
-        }
-</body>
+    </div>
+}

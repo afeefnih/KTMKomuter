@@ -1,61 +1,53 @@
 ﻿@model KTMKomuter.Models.KtmUsers
+@{
+    ViewData["Title"] = "Delete";
+}
 
-<head>
-    <title>Pos Laju Invoice</title>
-    <link href="~/css/PosLaju.css" rel="stylesheet" />
-</head>
-<body>
+<style>
+    .label-1 {
+        min-width: 100px;
+    }
+</style>
 
+<div class="mx-auto" style="max-width:800px;">
     <p>
-        <label>Id:</label>
-        @Html.DisplayFor(x => x.ViewId)
+        @Html.ActionLink(" Back to List", "Index", null, null, new { @class = "bi bi-arrow-left-short btn btn-primary" })
     </p>
+    <h5>Delete Confirmation</h5>
+    <div class="card">
+        <div class="card-body p-4">
 
-    <br />
-    <h5>User Information</h5>
-    <p>
-        <label>Your name:</label>
-        @Html.DisplayFor(x => x.PurchaserName)
-    </p>
 
-    <p>
-        <label>Your ID card / passport number :</label>
-        @Html.DisplayFor(x => x.IdentityCardOrPassportNumber)
-    </p>
-    <p>
-        <label>Your email:</label>
-        @Html.DisplayFor(x => x.EmailAddress)
-    </p>
+            <p>
+                <label class="fw-bold">@Html.DisplayFor(x => x.ViewId)</label>
+            </p>
+            <p>
+                <label class="label-1 fw-bold">@Html.DisplayNameFor(model => model.PurchaserName)</label>
+                @Html.DisplayFor(x => x.PurchaserName)
+            </p>
 
-    <br />
-
-    <h5>Train Information</h5>
-    <p>
-        <label>From:</label>
-        @Html.DisplayFor(x => x.DictCurrentDestination[Model.IndexCurrentDestination])
-    </p>
-    <p>
-        <label>To: </label>
-        @Html.DisplayFor(x => x.DictToDestination[Model.IndexToDestination])
-    </p>
-    <p>
-        <label>Amount: </label>
-        @Html.DisplayFor(x => x.Amount)
-    </p>
-    <p>
-        <label>After Discount price :</label>
-        @Html.DisplayFor(x => x.AfterDiscount)
-    </p>
-
-    <p>
-        @using (Html.BeginForm())
-        {
-            <input type="submit" value="Confirm Delete" />
-        }
-    </p>
-
-    <p>
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</body>
-
+            <p>
+                <label class="label-1 fw-bold">@Html.DisplayNameFor(model => model.IdentityCardOrPassportNumber)</label>
+                @Html.DisplayFor(x => x.IdentityCardOrPassportNumber)
+            </p>
+            <p>
+                <label class="label-1 fw-bold">@Html.DisplayNameFor(model => model.EmailAddress)</label>
+                @Html.DisplayFor(x => x.EmailAddress)
+            </p>
+            <p>
+                <label class="label-1 fw-bold">@Html.DisplayNameFor(model => model.DictCurrentDestination)</label>
+                @Html.DisplayFor(x => x.DictCurrentDestination[Model.IndexCurrentDestination])
+            </p>
+            <p>
+                <label class="label-1 fw-bold">@Html.DisplayNameFor(model => model.DictToDestination)</label>
+                @Html.DisplayFor(x => x.DictToDestination[Model.IndexToDestination])
+            </p>
+        </div>
+        <div class="card-footer p-4">
+            @using (Html.BeginForm())
+            {
+                <input type="submit" value="Confirm Delete" class="toright px-4 btn btn-primary" />
+            }
+        </div>
+    </div>
+</div>

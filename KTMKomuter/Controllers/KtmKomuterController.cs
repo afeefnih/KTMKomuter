@@ -254,14 +254,48 @@ namespace KTMKomuter.Controllers
             var currentDestination = ktm.DictCurrentDestination.ContainsKey(currentDestinationIndex) ? ktm.DictCurrentDestination[currentDestinationIndex] : "Unknown";
 
             var subject = "Ticket Information " + ktm.ViewId;
-            var body = "Ticket ID: " + ktm.ViewId + "<br>" +
-                       "Purchaser Name: " + ktm.PurchaserName + "<br>" +
-                       "Identity Card or Passport Number: " + ktm.IdentityCardOrPassportNumber + "<br>" +
-                       "Email Address: " + ktm.EmailAddress + "<br>" +
-                       "Current Destination: " + currentDestination + "<br>" +
-                       "To Destination: " + ktm.DictToDestination[ktm.IndexToDestination] + "<br>" +
-                       "Amount: " + ktm.Amount.ToString("c2") + "<br>" +
-                       "After Discount: " + ktm.AfterDiscount.ToString("c2");
+
+
+            var body = "<table style=\"font-size:16px;\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">" +
+                        "<tr>" +
+                            "<td style=\"font-weight:700; padding-right: 20px;\">Ticket ID</td>" +
+                            "<td>" + ktm.ViewId + "</td>" +
+                        "</tr>" +
+                        "<tr>" +
+                            "<td style=\"font-weight:700; padding-right: 20px;\">Name</td>" +
+                            "<td>" + ktm.PurchaserName + "</td>" +
+                        "</tr>" +
+                        "<tr>" +
+                            "<td style=\"font-weight:700; padding-right: 20px;\">IC/Passport</td>" +
+                            "<td>" + ktm.IdentityCardOrPassportNumber + "</td>" +
+                        "</tr>" +
+                        "<tr>" +
+                            "<td style=\"font-weight:700; padding-right: 20px;\">Email</td>" +
+                            "<td>" + ktm.EmailAddress + "</td>" +
+                        "</tr>" +
+                    "</table>" +
+                    "<br>" +
+                    "<table style=\"font-size:16px; \" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">" +
+                        "<tr style=\"font-weight:700;\">" +
+                            "<td style=\"padding-right: 100px;\">From</td>" +
+                            "<td>To</td>" +
+                        "</tr>" +
+                        "<tr>" +
+                            "<td style=\"padding-right: 10px;\">" + currentDestination + "</td>" +
+                            "<td>" + ktm.DictToDestination[ktm.IndexToDestination] + "</td>" +
+                        "</tr>" +
+                    "</table>" +
+                    "<br>" +
+                    "<table style=\"font-size:16px;\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">" +
+                        "<tr>" +
+                            "<td style=\"font-weight:700; padding-right: 20px;\">Regular Price</td>" +
+                            "<td>" + ktm.Amount.ToString("c2") + "</td>" +
+                        "</tr>" +
+                        "<tr>" +
+                            "<td style=\"font-weight:700; padding-right: 20px;\">Final Price</td>" +
+                            "<td>" + ktm.AfterDiscount.ToString("c2") + "</td>" +
+                        "</tr>" +
+                    "</table>";
 
             var mail = new Mail(configuration);
 

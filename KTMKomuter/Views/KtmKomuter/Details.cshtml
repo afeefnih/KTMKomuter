@@ -1,54 +1,96 @@
 ﻿@model KTMKomuter.Models.KtmUsers
 
-<head>
-    <title>Pos Laju Invoice</title>
-    <link href="~/css/PosLaju.css" rel="stylesheet" />
-</head>
-<body>
+@{
+    ViewData["Title"] = "Details";
+}
+<script type="text/javascript" src="~/js/jquery.min.js"></script>
+<script type="text/javascript" src="~/js/qrcode.min.js"></script>
+<style>
+    .label-1 {
+        min-width: 100px;
+    }
+</style>
 
+
+<div class="mx-auto" style="max-width:800px;">
     <p>
-        <label>Id:</label>
-        @Html.DisplayFor(x => x.ViewId)
+        @Html.ActionLink(" Back to List", "Index", null, null, new { @class = "bi bi-arrow-left-short btn btn-primary" })
     </p>
+
+    <h5>Ticket Information</h5>
+    <div class="card">
+        <div class="card-body p-4">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <p class="mb-0">
+                                <label class="fw-bold">@Html.DisplayNameFor(model => model.DictCurrentDestination)</label>
+                            </p><p>
+                                @Html.DisplayFor(x => x.DictCurrentDestination[Model.IndexCurrentDestination])
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="mb-0">
+                                <label class="fw-bold">@Html.DisplayNameFor(model => model.DictToDestination)<label>
+                            </p><p>
+                                @Html.DisplayFor(x => x.DictToDestination[Model.IndexToDestination])
+                            </p>
+                        </div>
+                    </div>
+                    <p class="mb-0">
+                        <label class="fw-bold">@Html.DisplayNameFor(model => model.Amount)</label>
+                    </p><p>
+                        @Html.DisplayFor(x => x.Amount)
+                    </p>
+                    <p class="mb-0">
+                        <label class="fw-bold">@Html.DisplayNameFor(model => model.AfterDiscount)</label>
+                    </p><p>
+                        @Html.DisplayFor(x => x.AfterDiscount)
+                    </p>
+                </div>
+                <div class="col-md-auto">
+                    <div id="qrcode" style="width:200px; height:200px; margin-top:15px;"></div>
+                    <p class="text-center fw-bold">
+                        <label id="ID">@Html.DisplayFor(x => x.ViewId)</label>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <br />
     <h5>User Information</h5>
-    <p>
-        <label>Your name:</label>
-        @Html.DisplayFor(x => x.PurchaserName)
-    </p>
+    <div class="card">
+        <div class="card-body p-4">
+            <p>
+                <i class="bi bi-person-fill me-3"></i><label class="label-1 fw-bold">@Html.DisplayNameFor(model => model.PurchaserName) </label>
+                @Html.DisplayFor(x => x.PurchaserName)
+            </p>
 
-    <p>
-        <label>Your ID card / passport number :</label>
-        @Html.DisplayFor(x => x.IdentityCardOrPassportNumber)
-    </p>
-    <p>
-        <label>Your email:</label>
-        @Html.DisplayFor(x => x.EmailAddress)
-    </p>
+            <p>
+                <i class="bi bi-person-vcard-fill me-3"></i><label class="label-1 fw-bold">@Html.DisplayNameFor(model => model.IdentityCardOrPassportNumber) </label>
+                @Html.DisplayFor(x => x.IdentityCardOrPassportNumber)
+            </p>
+            <p>
+                <i class="bi bi-envelope-fill me-3"></i><label class="label-1 fw-bold">@Html.DisplayNameFor(model => model.EmailAddress)</label>
+                @Html.DisplayFor(x => x.EmailAddress)
+            </p>
+        </div>
+    </div>
 
-    <br />
+</div>
+<script type="text/javascript">
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+        width: 200,
+        height: 200
+    });
 
-    <h5>Train Information</h5>
-    <p>
-        <label>From:</label>
-        @Html.DisplayFor(x => x.DictCurrentDestination[Model.IndexCurrentDestination])
-    </p>
-    <p>
-        <label>To: </label>
-        @Html.DisplayFor(x => x.DictToDestination[Model.IndexToDestination])
-    </p>
-    <p>
-        <label>Amount: </label>
-        @Html.DisplayFor(x => x.Amount)
-    </p>
-    <p>
-        <label>After Discount price :</label>
-        @Html.DisplayFor(x => x.AfterDiscount)
-    </p>
+    function makeCode() {
+        var labelText = $("#ID").text();
+        qrcode.makeCode(labelText);
+    }
 
-    <p>
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</body>
+    makeCode();
+</script>
 

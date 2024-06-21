@@ -1,7 +1,17 @@
 ﻿@model KTMKomuter.Models.KtmUsers
+@{
+    ViewData["Title"] = "Email";
+}
+<div class="mx-auto" style="max-width:800px;">
+    <p>
+        @Html.ActionLink(" Back to List", "Index", null, null, new { @class = "bi bi-arrow-left-short btn btn-primary" })
+    </p>
+    <h5>@ViewBag.Message</h5>
+    <div class="card">
+        <div class="card-body p-4">
 
-<p>@ViewBag.Message</p>
+            <p>@Html.Raw(ViewBag.Body)</p>
 
-<p>@Html.Raw(ViewBag.Body)</p>
-
-@Html.ActionLink("Back To List", "Index")
+        </div>
+    </div>
+</div>
