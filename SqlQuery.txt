@@ -32,7 +32,9 @@ CREATE PROCEDURE spUpdateIntoTable
     @IdentityCardOrPassportNumber NVARCHAR(50),
     @EmailAddress NVARCHAR(100),
     @indexCurrentDestination INT,
-    @indexToDestination INT
+    @indexToDestination INT,
+	@amount FLOAT,
+	@afterdiscount FLOAT
 AS
 BEGIN
     UPDATE KtmUser
@@ -40,7 +42,9 @@ BEGIN
         IdentityCardOrPassportNumber = @IdentityCardOrPassportNumber,
         EmailAddress = @EmailAddress,
         indexCurrentDestination = @indexCurrentDestination,
-        indexToDestination = @indexToDestination
+        indexToDestination = @indexToDestination,
+	Amount = @amount,
+	AfterDiscount = @afterdiscount
     WHERE Id = @Id;
 END;
 
