@@ -49,42 +49,6 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md mb-3">
-                        <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(model => model.DictCurrentDestination)</label>
-                        @Html.DropDownListFor(x => x.IndexCurrentDestination, new SelectList(Model.DictCurrentDestination, "Key", "Value"), "Select your origin",
-                                 new { @class = "form-select" })
-                        @Html.ValidationMessageFor(x => x.IndexCurrentDestination, "",
-                                 new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md mb-3">
-                        <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(model => model.DictToDestination)</label>
-                        @Html.DropDownListFor(x => x.IndexToDestination, new SelectList(Model.DictToDestination, "Key", "Value"), "Select your destination",
-                                 new { @class = "form-select" })
-                        @Html.ValidationMessageFor(x => x.IndexToDestination, "",
-                                 new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="row">
-
-                    <p class="col-md">
-                        <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(x => x.Category)</label>
-                        @Html.DropDownListFor(x => x.Category,
-                                 new SelectList(Model.DictCategoryDiscount, "Key", "Value"), "Select your categories",
-                                 new { @class = "form-select" })
-                        @Html.ValidationMessageFor(x => x.Category, "",
-                                 new { @class = "text-danger" })
-                    </p>
-                    <p class="col-md">
-                        <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(x => x.TicketType)</label>
-                        @Html.DropDownListFor(x => x.TicketType,
-                                 new SelectList(Model.DictTicketType, "Key", "Value"), "Select your categories",
-                                 new { @class = "form-select" })
-                        @Html.ValidationMessageFor(x => x.TicketType, "",
-                                 new { @class = "text-danger" })
-                    </p>
-                </div>
             </div>
 
             <div class="card-footer p-4">

@@ -94,6 +94,7 @@ namespace KTMKomuter.Controllers
         {
             KtmUsers ktm = new KtmUsers();
             ktm.IndexCurrentDestination = ktm.IndexToDestination = ktm.Category = -1;
+            ktm.TicketType = -1;
             return View(ktm);
         }
 
@@ -163,13 +164,7 @@ namespace KTMKomuter.Controllers
                         PurchaserName = reader.GetString(1),
                         IdentityCardOrPassportNumber = reader.GetString(2),
                         EmailAddress = reader.GetString(3),
-                        IndexCurrentDestination = reader.GetInt32(4),
-                        IndexToDestination = reader.GetInt32(5),
-                        Amount = reader.GetDouble(6),
-                        AfterDiscount = reader.GetDouble(7),
-                        Category = reader.GetInt32(8),
-                        TicketType = reader.GetInt32(9),
-                        NumberOfTickets = reader.GetInt32(10),
+                  
                     });
                 }
             }
@@ -202,6 +197,7 @@ namespace KTMKomuter.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 SqlConnection conn = new SqlConnection(configuration.GetConnectionString("ParcelConnStr"));
                 SqlCommand cmd = new SqlCommand("spUpdateIntoTable", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -210,10 +206,7 @@ namespace KTMKomuter.Controllers
                 cmd.Parameters.AddWithValue("@PurchaserName", ktm.PurchaserName);
                 cmd.Parameters.AddWithValue("@IdentityCardOrPassportNumber", ktm.IdentityCardOrPassportNumber);
                 cmd.Parameters.AddWithValue("@EmailAddress", ktm.EmailAddress);
-                cmd.Parameters.AddWithValue("@IndexCurrentDestination", ktm.IndexCurrentDestination);
-                cmd.Parameters.AddWithValue("@IndexToDestination", ktm.IndexToDestination);
-                cmd.Parameters.AddWithValue("@Category", ktm.Category);
-                cmd.Parameters.AddWithValue("@Type", ktm.TicketType);
+
               
 
                 try
