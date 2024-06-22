@@ -4,75 +4,107 @@
     ViewData["Title"] = "User List";
 }
 <div class="mx-auto">
-<h1>User List</h1>
-<p>
-    @Html.ActionLink(" New User", "TrainTicket", null, null, new { @class = "bi bi-person-add btn btn-primary" })
-</p>
-<table class="table table-hover table-striped rounded-header">
-    <thead class="table-dark rounded-top">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ViewId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PurchaserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdentityCardOrPassportNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmailAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DictCurrentDestination)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DictToDestination)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Amount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AfterDiscount)
-            </th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ViewId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PurchaserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdentityCardOrPassportNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmailAddress)
-            </td>
-            <td>
-                    @Html.DisplayFor(modelItem => item.DictCurrentDestination[item.IndexCurrentDestination])
-            </td>
-            <td>
-                    @Html.DisplayFor(modelItem => item.DictToDestination[item.IndexToDestination])
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AfterDiscount)
-            </td>
-            <td>
-                    @Html.ActionLink("", "Details", null, new { id = item.ViewId }, new { @class = "bi bi-card-text btn btn-sm btn-success", title = "Details" })
-                    @Html.ActionLink("", "Edit", null, new { id = item.ViewId }, new { @class = "bi bi-pencil-square btn btn-sm btn-primary", title = "Edit" })
-                    @Html.ActionLink("", "Delete", null, new { id = item.ViewId }, new { @class = "bi bi-trash3 btn btn-sm btn-danger", title = "Delete" })
-                    @Html.ActionLink("", "SendMail", null, new { id = item.ViewId }, new { @class = "bi bi-envelope btn btn-sm btn-info", title = "Send Mail" })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <h1>User List</h1>
+    <p>
+        @Html.ActionLink(" New User", "TrainTicket", null, null, new { @class = "bi bi-person-add btn btn-primary" })
+    </p>
+    <table class="table table-hover table-striped rounded-header">
+        <thead class="table-dark rounded-top">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PurchaserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdentityCardOrPassportNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmailAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DictCurrentDestination)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DictToDestination)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AfterDiscount)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.TicketType)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.NumberOfTickets)
+                </th>
+
+
+
+
+
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ViewId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PurchaserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdentityCardOrPassportNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmailAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DictCurrentDestination[item.IndexCurrentDestination])
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DictToDestination[item.IndexToDestination])
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AfterDiscount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TicketTypeString)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CategoryString)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumberOfTickets)
+                            </td>
+
+
+                    <td>
+                        @Html.ActionLink("", "Details", null, new { id = item.ViewId }, new { @class = "bi bi-card-text btn btn-sm btn-success", title = "Details" })
+                        @Html.ActionLink("", "Edit", null, new { id = item.ViewId }, new { @class = "bi bi-pencil-square btn btn-sm btn-primary", title = "Edit" })
+                        @Html.ActionLink("", "Delete", null, new { id = item.ViewId }, new { @class = "bi bi-trash3 btn btn-sm btn-danger", title = "Delete" })
+                        @Html.ActionLink("", "SendMail", null, new { id = item.ViewId }, new { @class = "bi bi-envelope btn btn-sm btn-info", title = "Send Mail" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

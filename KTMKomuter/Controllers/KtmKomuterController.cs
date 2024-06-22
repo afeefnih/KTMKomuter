@@ -169,6 +169,7 @@ namespace KTMKomuter.Controllers
                         AfterDiscount = reader.GetDouble(7),
                         Category = reader.GetInt32(8),
                         TicketType = reader.GetInt32(9),
+                        NumberOfTickets = reader.GetInt32(10),
                     });
                 }
             }
@@ -205,16 +206,15 @@ namespace KTMKomuter.Controllers
                 SqlCommand cmd = new SqlCommand("spUpdateIntoTable", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.Parameters.AddWithValue("@Id", id); // Ensure ktm.Id is correctly populated
                 cmd.Parameters.AddWithValue("@PurchaserName", ktm.PurchaserName);
                 cmd.Parameters.AddWithValue("@IdentityCardOrPassportNumber", ktm.IdentityCardOrPassportNumber);
                 cmd.Parameters.AddWithValue("@EmailAddress", ktm.EmailAddress);
-                cmd.Parameters.AddWithValue("@indexCurrentDestination", ktm.IndexCurrentDestination);
-                cmd.Parameters.AddWithValue("@indexToDestination", ktm.IndexToDestination);
-                cmd.Parameters.AddWithValue("@amount", ktm.Amount);
-                cmd.Parameters.AddWithValue("@afterdiscount", ktm.AfterDiscount);
-                cmd.Parameters.AddWithValue("@category", ktm.Category);
-                cmd.Parameters.AddWithValue("@type", ktm.TicketType);
+                cmd.Parameters.AddWithValue("@IndexCurrentDestination", ktm.IndexCurrentDestination);
+                cmd.Parameters.AddWithValue("@IndexToDestination", ktm.IndexToDestination);
+                cmd.Parameters.AddWithValue("@Category", ktm.Category);
+                cmd.Parameters.AddWithValue("@Type", ktm.TicketType);
+              
 
                 try
                 {
@@ -222,8 +222,8 @@ namespace KTMKomuter.Controllers
                     int rowsAffected = cmd.ExecuteNonQuery();
                     if (rowsAffected == 0)
                     {
-                        logger.LogWarning("No rows were updated in the database. Check the provided Id.");
-                        return RedirectToAction("Error", new { message = "No rows were updated. Please check the provided Id." });
+                        logger.LogWarning("No rows were updated in the database. Check the provided Id: " + ktm.Id);
+                        return RedirectToAction("Error", new { message = "No rows were updated. Please check the provided Id: " + ktm.Id });
                     }
                 }
                 catch (SqlException ex)
@@ -245,7 +245,6 @@ namespace KTMKomuter.Controllers
             }
             return View(ktm);
         }
-
         public IActionResult SendMail(string id)
         {
             string errorMessage;
