@@ -95,7 +95,7 @@
                     <p class="col-md">
                     <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(x => x.TicketType)</label>
                     @Html.DropDownListFor(x => x.TicketType,
-                             new SelectList(Model.DictTicketType, "Key", "Value"), "Select your categories",
+                             new SelectList(Model.DictTicketType, "Key", "Value"), "Select your ticket type",
                              new { @class = "form-select" })
                     @Html.ValidationMessageFor(x => x.TicketType, "",
                              new { @class = "text-danger" })
@@ -107,7 +107,7 @@
                         <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(x => x.NumberOfTickets)</label>
                         <div class="form-wicon">
                             @Html.TextBoxFor(x => x.NumberOfTickets, new { @class = "form-control" })
-                            <i class="bi bi-person-vcard-fill ms-3"></i>
+                            <i class="bi bi-ticket-detailed-fill ms-3"></i>
                         </div>
                         @Html.ValidationMessageFor(x => x.NumberOfTickets, "",
                                  new { @class = "text-danger" })
