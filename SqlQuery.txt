@@ -19,12 +19,16 @@ CREATE PROCEDURE spInsertIntoTable
     @indexCurrentDestination INT,
     @indexToDestination INT,
     @Amount float,
-	@AfterDiscount float
+	@AfterDiscount float,
+	@Category INT,
+	@Type INT,
+	@NumberOfTicket INT
 AS
     INSERT INTO KtmUser
    
     VALUES 
-    (@Id,@PurchaserName, @IdentityCardOrPassportNumber, @EmailAddress, @indexCurrentDestination, @indexToDestination, @Amount, @AfterDiscount)
+    (@Id,@PurchaserName, @IdentityCardOrPassportNumber, @EmailAddress, @indexCurrentDestination, 
+	@indexToDestination, @Amount, @AfterDiscount, @Category, @Type, @NumberOfTicket)
 
 CREATE PROCEDURE spUpdateIntoTable
     @Id CHAR(10),
@@ -34,7 +38,9 @@ CREATE PROCEDURE spUpdateIntoTable
     @indexCurrentDestination INT,
     @indexToDestination INT,
 	@amount FLOAT,
-	@afterdiscount FLOAT
+	@afterdiscount FLOAT,
+	@category INT,
+	@type INT
 AS
 BEGIN
     UPDATE KtmUser
@@ -43,8 +49,10 @@ BEGIN
         EmailAddress = @EmailAddress,
         indexCurrentDestination = @indexCurrentDestination,
         indexToDestination = @indexToDestination,
-	Amount = @amount,
-	AfterDiscount = @afterdiscount
+		Amount = @amount,
+		AfterDiscount = @afterdiscount,
+		Category = @category,
+		TypeOfTicket = @type
     WHERE Id = @Id;
 END;
 
