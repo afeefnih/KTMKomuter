@@ -10,8 +10,10 @@ CREATE TABLE [dbo].[KtmUser] (
     [Category]                     INT            NOT NULL,
     [TypeOfTicket]                 INT            NOT NULL,
     [NumberOfTicket]               INT            NOT NULL,
+    [CurrentDate] DATETIME NULL, 
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
+
 
 CREATE PROCEDURE spInsertIntoTable
 	@Id char(10),
@@ -24,13 +26,14 @@ CREATE PROCEDURE spInsertIntoTable
 	@AfterDiscount float,
 	@Category INT,
 	@Type INT,
-	@NumberOfTicket INT
+	@NumberOfTicket INT,
+	@DateOfPurchase DATETIME
 AS
     INSERT INTO KtmUser
    
     VALUES 
     (@Id,@PurchaserName, @IdentityCardOrPassportNumber, @EmailAddress, @indexCurrentDestination, 
-	@indexToDestination, @Amount, @AfterDiscount, @Category, @Type, @NumberOfTicket)
+	@indexToDestination, @Amount, @AfterDiscount, @Category, @Type, @NumberOfTicket, @DateOfPurchase)
 
 CREATE PROCEDURE spUpdateIntoTable
       @Id CHAR(10),
