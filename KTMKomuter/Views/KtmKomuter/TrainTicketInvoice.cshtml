@@ -48,6 +48,25 @@
                     </p><p>
                         @Html.DisplayFor(x => x.AfterDiscount)
                     </p>
+
+                    <p class="mb-0">
+                        <label class="fw-bold">@Html.DisplayNameFor(model => model.TicketType)</label>
+                    </p><p>
+                        @Html.DisplayFor(x => x.TicketTypeString)
+                    </p>
+
+                    <p class="mb-0">
+                        <label class="fw-bold">@Html.DisplayNameFor(model => model.Category)</label>
+                    </p><p>
+                        @Html.DisplayFor(x => x.CategoryString)
+                    </p>
+
+                    <p class="mb-0">
+                        <label class="fw-bold">@Html.DisplayNameFor(model => model.NumberOfTickets)</label>
+                    </p><p>
+                        @Html.DisplayFor(x => x.NumberOfTickets)
+                    </p>
+
                 </div>
                 <div class="col-md-auto">
                     <div id="qrcode" style="width:200px; height:200px; margin-top:15px;"></div>
