@@ -42,6 +42,18 @@
                 <label class="label-1 fw-bold">@Html.DisplayNameFor(model => model.DictToDestination)</label>
                 @Html.DisplayFor(x => x.DictToDestination[Model.IndexToDestination])
             </p>
+            <p>
+                <label class="label-1 fw-bold">@Html.DisplayNameFor(model => model.TicketType)</label>
+                @Html.DisplayFor(x => x.TicketTypeString)
+            </p>
+            <p>
+                <label class="label-1 fw-bold">@Html.DisplayNameFor(model => model.Category)</label>
+                @Html.DisplayFor(x => x.CategoryString)
+            </p>
+            <p>
+                <label class="label-1 fw-bold">@Html.DisplayNameFor(model => model.NumberOfTickets)</label>
+                @Html.DisplayFor(x => x.NumberOfTickets)
+            </p>
         </div>
         <div class="card-footer p-4">
             @using (Html.BeginForm())

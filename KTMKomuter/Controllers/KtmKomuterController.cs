@@ -48,7 +48,10 @@ namespace KTMKomuter.Controllers
                         IndexCurrentDestination = reader.GetInt32(4),
                         IndexToDestination = reader.GetInt32(5),
                         Amount = reader.GetDouble(6),
-                        AfterDiscount = reader.GetDouble(7)
+                        AfterDiscount = reader.GetDouble(7),
+                        Category = reader.GetInt32(8),
+                        TicketType = reader.GetInt32(9),
+                        NumberOfTickets = reader.GetInt32(10),
                     });
                 }
             }
@@ -112,6 +115,9 @@ namespace KTMKomuter.Controllers
                 cmd.Parameters.AddWithValue("@IndexToDestination", ktm.IndexToDestination);
                 cmd.Parameters.AddWithValue("@Amount", ktm.Amount);
                 cmd.Parameters.AddWithValue("@AfterDiscount", ktm.AfterDiscount);
+                cmd.Parameters.AddWithValue("@Category", ktm.Category);
+                cmd.Parameters.AddWithValue("@Type", ktm.TicketType);
+                cmd.Parameters.AddWithValue("@NumberOfTicket", ktm.NumberOfTickets);
 
                 try
                 {
@@ -160,7 +166,9 @@ namespace KTMKomuter.Controllers
                         IndexCurrentDestination = reader.GetInt32(4),
                         IndexToDestination = reader.GetInt32(5),
                         Amount = reader.GetDouble(6),
-                        AfterDiscount = reader.GetDouble(7)
+                        AfterDiscount = reader.GetDouble(7),
+                        Category = reader.GetInt32(8),
+                        TicketType = reader.GetInt32(9),
                     });
                 }
             }
@@ -205,6 +213,8 @@ namespace KTMKomuter.Controllers
                 cmd.Parameters.AddWithValue("@indexToDestination", ktm.IndexToDestination);
                 cmd.Parameters.AddWithValue("@amount", ktm.Amount);
                 cmd.Parameters.AddWithValue("@afterdiscount", ktm.AfterDiscount);
+                cmd.Parameters.AddWithValue("@category", ktm.Category);
+                cmd.Parameters.AddWithValue("@type", ktm.TicketType);
 
                 try
                 {
