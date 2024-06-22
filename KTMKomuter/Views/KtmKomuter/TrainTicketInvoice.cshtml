@@ -11,7 +11,6 @@
     }
 </style>
 
-
 <div class="mx-auto" style="max-width:800px;">
     <p>
         @Html.ActionLink(" Back", "TrainTicket", null, null, new { @class = "bi bi-arrow-left-short btn btn-primary" })
@@ -20,55 +19,66 @@
     <h5>Ticket Information</h5>
     <div class="card">
         <div class="card-body p-4">
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert @(ViewBag.Message.Contains("successfully") ? "alert-success" : "alert-danger")">
+                    @ViewBag.Message
+                </div>
+            }
+
             <div class="row">
                 <div class="col">
                     <div class="row">
                         <div class="col">
                             <p class="mb-0">
                                 <label class="fw-bold">@Html.DisplayNameFor(model => model.DictCurrentDestination)</label>
-                            </p><p>
+                            </p>
+                            <p>
                                 @Html.DisplayFor(x => x.DictCurrentDestination[Model.IndexCurrentDestination])
                             </p>
                         </div>
                         <div class="col">
                             <p class="mb-0">
-                                <label class="fw-bold">@Html.DisplayNameFor(model => model.DictToDestination)<label>
-                            </p><p>
+                                <label class="fw-bold">@Html.DisplayNameFor(model => model.DictToDestination)</label>
+                            </p>
+                            <p>
                                 @Html.DisplayFor(x => x.DictToDestination[Model.IndexToDestination])
                             </p>
                         </div>
                     </div>
                     <p class="mb-0">
                         <label class="fw-bold">@Html.DisplayNameFor(model => model.Amount)</label>
-                    </p><p>
+                    </p>
+                    <p>
                         @Html.DisplayFor(x => x.Amount)
                     </p>
                     <p class="mb-0">
                         <label class="fw-bold">@Html.DisplayNameFor(model => model.AfterDiscount)</label>
-                    </p><p>
+                    </p>
+                    <p>
                         @Html.DisplayFor(x => x.AfterDiscount)
                     </p>
 
                     <p class="mb-0">
                         <label class="fw-bold">@Html.DisplayNameFor(model => model.TicketType)</label>
-                    </p><p>
+                    </p>
+                    <p>
                         @Html.DisplayFor(x => x.TicketTypeString)
                     </p>
 
                     <p class="mb-0">
                         <label class="fw-bold">@Html.DisplayNameFor(model => model.Category)</label>
-                    </p><p>
+                    </p>
+                    <p>
                         @Html.DisplayFor(x => x.CategoryString)
                     </p>
 
                     <p class="mb-0">
                         <label class="fw-bold">@Html.DisplayNameFor(model => model.NumberOfTickets)</label>
-                    </p><p>
+                    </p>
+                    <p>
                         @Html.DisplayFor(x => x.NumberOfTickets)
                     </p>
-
-
-
                 </div>
                 <div class="col-md-auto">
                     <div id="qrcode" style="width:200px; height:200px; margin-top:15px;"></div>
@@ -76,9 +86,6 @@
                         <label id="ID">@Html.DisplayFor(x => x.Id)</label>
                     </p>
                 </div>
-
-
-
             </div>
         </div>
     </div>
@@ -102,8 +109,8 @@
             </p>
         </div>
     </div>
-
 </div>
+
 <script type="text/javascript">
     var qrcode = new QRCode(document.getElementById("qrcode"), {
         width: 200,
@@ -117,4 +124,3 @@
 
     makeCode();
 </script>
-
