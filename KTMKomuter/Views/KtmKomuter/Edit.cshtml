@@ -65,6 +65,26 @@
                                  new { @class = "text-danger" })
                     </div>
                 </div>
+
+                <div class="row">
+
+                    <p class="col-md">
+                        <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(x => x.Category)</label>
+                        @Html.DropDownListFor(x => x.Category,
+                                 new SelectList(Model.DictCategoryDiscount, "Key", "Value"), "Select your categories",
+                                 new { @class = "form-select" })
+                        @Html.ValidationMessageFor(x => x.Category, "",
+                                 new { @class = "text-danger" })
+                    </p>
+                    <p class="col-md">
+                        <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(x => x.TicketType)</label>
+                        @Html.DropDownListFor(x => x.TicketType,
+                                 new SelectList(Model.DictTicketType, "Key", "Value"), "Select your categories",
+                                 new { @class = "form-select" })
+                        @Html.ValidationMessageFor(x => x.TicketType, "",
+                                 new { @class = "text-danger" })
+                    </p>
+                </div>
             </div>
 
             <div class="card-footer p-4">
