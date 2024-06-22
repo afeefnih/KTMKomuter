@@ -8,6 +8,17 @@
     <p>
         @Html.ActionLink(" New User", "TrainTicket", null, null, new { @class = "bi bi-person-add btn btn-primary" })
     </p>
+
+    @using (Html.BeginForm("SearchIndex", "KtmKomuter", FormMethod.Get))
+    {
+        <p>
+            <label>Search by ticket id or customer name: </label>
+            @Html.TextBox("SearchString")
+            <input type="submit" value="Search" />
+            @Html.ActionLink("Back to Full List", "index")
+        </p>
+    }
+
     <table class="table table-hover table-striped rounded-header">
         <thead class="table-dark rounded-top">
             <tr>

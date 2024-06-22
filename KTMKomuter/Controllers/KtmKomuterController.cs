@@ -214,6 +214,15 @@ namespace KTMKomuter.Controllers
 
             return mail.Send(configuration["Gmail:Username"], ktm.EmailAddress, subject, body);
         }
+        public IActionResult SearchIndex(string searchString = "")
+        {
+            IList<KtmUsers> dbList = GetDbList(out string errorMessage);
+            var result = dbList.Where(x => x.Id.ToLower().Contains(searchString.ToLower()) ||
+            x.PurchaserName.ToLower().Contains(searchString.ToLower()))
+                .OrderBy(x => x.PurchaserName).ThenByDescending(x => x.NumberOfTickets);
+
+            return View("Index", result);
+        }
 
         [HttpGet]
         public IActionResult Edit(string id)
