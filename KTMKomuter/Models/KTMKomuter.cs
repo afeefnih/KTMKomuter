@@ -51,25 +51,20 @@ namespace KTMKomuter.Models
             {
                 if (TicketType == 0)
                 {
-                    return rates[IndexCurrentDestination, IndexToDestination] * NumberOfTickets;
+                    return rates[IndexCurrentDestination, IndexToDestination] * NumberOfTickets.GetValueOrDefault(0);
                 }
                 else
                 {
-                    return rates[IndexCurrentDestination, IndexToDestination] * NumberOfTickets * 2;
+                    return rates[IndexCurrentDestination, IndexToDestination] * NumberOfTickets.GetValueOrDefault(0) * 2;
                 }
             }
             set { }
         }
 
-
-
-
-
         [Required(ErrorMessage = "Select Your Category")]
         [Display(Name = "Category")]
         public int Category { get; set; }
 
-        [Required(ErrorMessage = "Select Your Category")]
         [Display(Name = "Category")]
         public IDictionary<int, string> DictCategoryDiscount
         {
@@ -77,12 +72,11 @@ namespace KTMKomuter.Models
             {
                 return new Dictionary<int, string>()
                 {
-                {0, "Senior Citizens"},
-                {1, "Disabled"},
-                {2, "Students"},
-                {3, "None"}
-
-             };
+                    {0, "Senior Citizens"},
+                    {1, "Disabled"},
+                    {2, "Students"},
+                    {3, "None"}
+                };
             }
             set { }
         }
@@ -97,17 +91,14 @@ namespace KTMKomuter.Models
         }
 
         [Required(ErrorMessage = "Enter Number of Tickets")]
+        [Range(1, int.MaxValue, ErrorMessage = "Number of tickets must be greater than 0.")]
         [Display(Name = "Number of Tickets")]
-        public int NumberOfTickets { get; set; }
-
+        public int? NumberOfTickets { get; set; }
 
         [Required(ErrorMessage = "Select Ticket Type")]
         [Display(Name = "Ticket Type")]
         public int TicketType { get; set; }
 
-
-
-        [Required(ErrorMessage = "Select Ticket Type")]
         [Display(Name = "Ticket Type")]
         public IDictionary<int, string> DictTicketType
         {
@@ -130,14 +121,6 @@ namespace KTMKomuter.Models
             }
             set { }
         }
-
-
-
-
-
-
-
-
 
         [DisplayFormat(DataFormatString = "{0:RM0.00}")]
         [Display(Name = "Final Price")]
@@ -169,7 +152,6 @@ namespace KTMKomuter.Models
             set { }
         }
 
-        // Delivery Rate Table
         [Required]
         [Display(Name = "From")]
         public IDictionary<int, string> DictCurrentDestination
