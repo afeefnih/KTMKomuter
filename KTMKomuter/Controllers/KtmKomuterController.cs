@@ -51,6 +51,7 @@ namespace KTMKomuter.Controllers
                         Category = reader.GetInt32(8),
                         TicketType = reader.GetInt32(9),
                         NumberOfTickets = reader.GetInt32(10),
+                        ViewDateTime = reader.GetDateTime(11),
                     });
                 }
             }
@@ -101,6 +102,7 @@ namespace KTMKomuter.Controllers
         {
             if (ModelState.IsValid)
             {
+                ktm.ViewDateTime = DateTime.Now;
                 SqlConnection conn = new SqlConnection(configuration.GetConnectionString("ParcelConnStr"));
                 SqlCommand cmd = new SqlCommand("spInsertIntoTable", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -116,6 +118,7 @@ namespace KTMKomuter.Controllers
                 cmd.Parameters.AddWithValue("@Category", ktm.Category);
                 cmd.Parameters.AddWithValue("@Type", ktm.TicketType);
                 cmd.Parameters.AddWithValue("@NumberOfTicket", ktm.NumberOfTickets);
+                cmd.Parameters.AddWithValue("@DateOfPurchase", ktm.ViewDateTime);
 
                 try
                 {
@@ -159,12 +162,12 @@ namespace KTMKomuter.Controllers
             var currentDestinationIndex = ktm.IndexCurrentDestination;
             var currentDestination = ktm.DictCurrentDestination.ContainsKey(currentDestinationIndex) ? ktm.DictCurrentDestination[currentDestinationIndex] : "Unknown";
 
-            var subject = "Ticket Information " + ktm.ViewId;
+            var subject = "Ticket Information " + ktm.Id;
 
             var body = "<table style=\"font-size:16px;\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">" +
                         "<tr>" +
                             "<td style=\"font-weight:700; padding-right: 20px;\">Ticket ID</td>" +
-                            "<td>" + ktm.ViewId + "</td>" +
+                            "<td>" + ktm.Id + "</td>" +
                         "</tr>" +
                         "<tr>" +
                             "<td style=\"font-weight:700; padding-right: 20px;\">Name</td>" +
@@ -200,6 +203,11 @@ namespace KTMKomuter.Controllers
                             "<td style=\"font-weight:700; padding-right: 20px;\">Final Price</td>" +
                             "<td>" + ktm.AfterDiscount.ToString("c2") + "</td>" +
                         "</tr>" +
+
+                        "<tr>" +
+                            "<td style=\"font-weight:700; padding-right: 20px;\">Date time transaction</td>" +
+                            "<td>" + ktm.TicketDateTime + "</td>" +
+
                     "</table>";
 
             var mail = new Mail(configuration);

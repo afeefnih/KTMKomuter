@@ -21,6 +21,21 @@ namespace KTMKomuter.Models
         [Display(Name = "ID")]
         public string? ViewId { get; set; }
 
+        [Display(Name = "Date & Time")]
+        public DateTime TicketDateTime
+        {
+            get
+            {
+                return DateTime.Now;
+            }
+
+            set { }
+        }
+
+        [Display(Name = "Date & Time")]
+        public DateTime ViewDateTime { get; set; }
+
+
         // Sender
         [Required(ErrorMessage = "Enter Your name")]
         [Display(Name = "Name")]
