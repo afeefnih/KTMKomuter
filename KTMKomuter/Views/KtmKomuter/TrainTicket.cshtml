@@ -90,7 +90,27 @@
                         @Html.ValidationMessageFor(x => x.Category, "",
                                  new { @class = "text-danger" })
                     </p>
-                    <p class="col-md"></p>
+                    <p class="col-md">
+                    <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(x => x.TicketType)</label>
+                    @Html.DropDownListFor(x => x.TicketType,
+                             new SelectList(Model.DictTicketType, "Key", "Value"), "Select your categories",
+                             new { @class = "form-select" })
+                    @Html.ValidationMessageFor(x => x.TicketType, "",
+                             new { @class = "text-danger" })
+                    </p>
+                </div>
+
+                <div class="row">
+                    <div class="col-md mb-3">
+                        <label class="label-sm-grey fw-bold mb-1">@Html.DisplayNameFor(x => x.NumberOfTickets)</label>
+                        <div class="form-wicon">
+                            @Html.TextBoxFor(x => x.NumberOfTickets, new { @class = "form-control" })
+                            <i class="bi bi-person-vcard-fill ms-3"></i>
+                        </div>
+                        @Html.ValidationMessageFor(x => x.NumberOfTickets, "",
+                                 new { @class = "text-danger" })
+                    </div>
+                   
                 </div>
             </div>
             <div class="card-footer p-4">
