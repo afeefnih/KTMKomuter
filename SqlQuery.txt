@@ -13,7 +13,6 @@ CREATE TABLE [dbo].[KtmUser] (
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
-
 CREATE PROCEDURE spInsertIntoTable
 	@Id char(10),
     @PurchaserName NVARCHAR(100),
@@ -34,32 +33,26 @@ AS
 	@indexToDestination, @Amount, @AfterDiscount, @Category, @Type, @NumberOfTicket)
 
 CREATE PROCEDURE spUpdateIntoTable
-    @Id CHAR(10),
+      @Id CHAR(10),
     @PurchaserName NVARCHAR(100),
     @IdentityCardOrPassportNumber NVARCHAR(50),
     @EmailAddress NVARCHAR(100),
-    @indexCurrentDestination INT,
+	@indexCurrentDestination INT,
     @indexToDestination INT,
-	@amount FLOAT,
-	@afterdiscount FLOAT,
-	@category INT,
-	@type INT
+	@Category INT,
+	@Type INT
+	
+
 AS
 BEGIN
     UPDATE KtmUser
-    SET PurchaserName = @PurchaserName,
+     SET PurchaserName = @PurchaserName,
         IdentityCardOrPassportNumber = @IdentityCardOrPassportNumber,
-        EmailAddress = @EmailAddress,
-        indexCurrentDestination = @indexCurrentDestination,
+        EmailAddress = @EmailAddress, 
+		indexCurrentDestination = @indexCurrentDestination,
         indexToDestination = @indexToDestination,
-		Amount = @amount,
-		AfterDiscount = @afterdiscount,
-		Category = @category,
-		TypeOfTicket = @type
+		Category = @Category,
+		TypeOfTicket = @Type
+		
     WHERE Id = @Id;
 END;
-
-CREATE PROCEDURE spDeleteTicket
-	@Id char(10)
-AS
-DELETE FROM KtmUser WHERE Id = @Id;
