@@ -77,6 +77,8 @@
                             @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control" })
                             <i class="bi bi-envelope-fill ms-3"></i>
                         </div>
+                        @Html.ValidationMessageFor(x => x.EmailAddress, "",
+                                 new { @class = "text-danger" })
                     </div>
                 </div>
 
