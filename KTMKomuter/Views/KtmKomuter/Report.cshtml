@@ -1,0 +1,44 @@
+﻿@model IEnumerable<KTMKomuter.Models.KtmUsers>
+
+@{
+    ViewData["Title"] = "Report Analysis";
+}
+
+<div class="mx-auto">
+    <h1>Report Analysis</h1>
+    <p>
+        @Html.ActionLink("User List", "Index", null, null, new { @class = "bi bi-person-add btn btn-primary" })
+    </p>
+
+    <div class="card">
+        <div class="card-body p-4">
+            <h2>Report 25 JUN 2024</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Report Metric</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Total Number of Tickets Sold</td>
+                        <td>@ViewBag.TotalTicketsSold</td>
+                    </tr>
+                    <tr>
+                        <td>Average Discounted Amount per User</td>
+                        <td>RM @ViewBag.AverageDiscountedAmountPerUser.ToString("0.00")</td>
+                    </tr>
+                    <tr>
+                        <td>Total Amount Collected Today</td>
+                        <td>RM @ViewBag.TotalAmountCollectedToday.ToString("0.00")</td>
+                    </tr>
+                    <tr>
+                        <td>Number of Transactions Today</td>
+                        <td>@ViewBag.NumberOfTransactionsToday</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

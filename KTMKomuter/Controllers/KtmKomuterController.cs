@@ -80,6 +80,61 @@ namespace KTMKomuter.Controllers
             {
                 return RedirectToAction("Error", new { message = errorMessage });
             }
+
+            return View(dbList);
+        }
+
+        public IActionResult Report()
+        {
+            string errorMessage;
+            var dbList = GetDbList(out errorMessage);
+            if (errorMessage != null)
+            {
+                return RedirectToAction("Error", new { message = errorMessage });
+            }
+
+            // Total number of tickets sold
+            var totalTicketsSold = dbList.Sum(user => user.NumberOfTickets);
+            ViewBag.TotalTicketsSold = totalTicketsSold;
+
+            // Average discounted amount per user
+            var averageDiscountedAmountPerUser = dbList.Any() ? dbList.Average(user => user.AfterDiscount) : 0;
+            ViewBag.AverageDiscountedAmountPerUser = averageDiscountedAmountPerUser;
+
+            // Total amount collected today
+            var today = DateTime.Today;
+            var totalAmountCollectedToday = dbList
+                .Where(user => user.ViewDateTime.Date == today)
+                .Sum(user => user.AfterDiscount);
+            ViewBag.TotalAmountCollectedToday = totalAmountCollectedToday;
+
+            // Top purchaser by amount
+            var topPurchaser = dbList
+                .OrderByDescending(user => user.AfterDiscount)
+                .FirstOrDefault();
+            ViewBag.TopPurchaser = topPurchaser;
+
+            // Number of transactions today
+            var numberOfTransactionsToday = dbList
+                .Count(user => user.ViewDateTime.Date == today);
+            ViewBag.NumberOfTransactionsToday = numberOfTransactionsToday;
+
+            // Most popular destination
+            var mostPopularDestination = dbList
+                .GroupBy(user => user.IndexToDestination)
+                .OrderByDescending(group => group.Count())
+                .Select(group => group.Key)
+                .FirstOrDefault();
+            ViewBag.MostPopularDestination = mostPopularDestination;
+
+            // Count of different ticket types
+            var ticketTypeCounts = dbList
+                .GroupBy(user => user.TicketType)
+                .Select(group => new { TicketType = group.Key, Count = group.Count() })
+                .ToList();
+            ViewBag.TicketTypeCounts = ticketTypeCounts;
+
+
             return View(dbList);
         }
 
@@ -197,11 +252,11 @@ namespace KTMKomuter.Controllers
                     "<table style=\"font-size:16px;\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">" +
                         "<tr>" +
                             "<td style=\"font-weight:700; padding-right: 20px;\">Regular Price</td>" +
-                            "<td>" + ktm.Amount.ToString("c2") + "</td>" +
+                            "<td>" + ktm.Amount.ToString("RM0.00") + "</td>" +
                         "</tr>" +
                         "<tr>" +
                             "<td style=\"font-weight:700; padding-right: 20px;\">Final Price</td>" +
-                            "<td>" + ktm.AfterDiscount.ToString("c2") + "</td>" +
+                            "<td>" + ktm.AfterDiscount.ToString("RM0.00") + "</td>" +
                         "</tr>" +
 
                         "<tr>" +
