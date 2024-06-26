@@ -39,7 +39,7 @@ This project is an online ticketing system for KTM Komuter developed using ASP.N
 This project is licensed under the [MIIT License](LICENSE).
 
 ## Output 
-![Table Image](images/ISB42603 Mar 2024 Group Project 2 (20%)_page29_image.png)
 ![Table Image](gambar1.png)
-![Table Image](image_2024-06-08_015915532.png)
-![Table Image](image_2024-06-08_015915532.png)
+![Table Image](gambar2.png)
+![Table Image](gambar3.png)
+![Table Image](gambar4.png)
